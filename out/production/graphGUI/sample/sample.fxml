@@ -8,7 +8,7 @@
       <AnchorPane prefHeight="700.0" prefWidth="271.0" style="-fx-background-color: #393351;">
          <children>
             <Button fx:id="btn1" layoutX="52.0" layoutY="106.0" mnemonicParsing="false" onAction="#loadFile" prefHeight="43.0" prefWidth="163.0" text="Load" />
-            <Button layoutX="52.0" layoutY="396.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="163.0" text="Basic" />
+            <Button fx:id="btn2" layoutX="52.0" layoutY="396.0" mnemonicParsing="false" onAction="#basicSimulation" prefHeight="43.0" prefWidth="163.0" text="Basic" />
             <Button layoutX="54.0" layoutY="471.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="163.0" text="Greedy" />
             <Button layoutX="54.0" layoutY="547.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="163.0" text="MCTS" />
          </children>
