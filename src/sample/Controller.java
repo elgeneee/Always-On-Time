@@ -139,10 +139,8 @@ public class Controller extends AnchorPane {
         Stage window2 = (Stage) btn2.getScene().getWindow();
         Scene scene2 = new Scene(root2,1000,700);
 
-
         root2.getChildren().addAll(com.getLineList());
         root2.getChildren().addAll(com.getCircleList());
-
 
         window2.setTitle("Always-On-Time");
         window2.setResizable(false);
