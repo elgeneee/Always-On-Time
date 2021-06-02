@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
+    //1200px x 1000
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 

@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
@@ -13,6 +14,7 @@ public class Component {
     ArrayList<Circle> circleList = new ArrayList<Circle>();
     ArrayList<Line> lineList = new ArrayList<Line>();
     List<Location> location = new ArrayList<>();
+    ArrayList<ImageView> truckList = new ArrayList<>();
 
     private Component(){}
 
@@ -30,6 +32,10 @@ public class Component {
 
     public void setCircleList(ArrayList<Circle> c){
         circleList = c;
+    }
+
+    public void setTruckList(ArrayList<ImageView> tl){
+        truckList = tl;
     }
 
     public void setLineList(ArrayList<Line> l){
