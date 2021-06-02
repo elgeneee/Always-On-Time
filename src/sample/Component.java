@@ -5,12 +5,14 @@ import javafx.scene.shape.Line;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
-//this class is singleton
+//a singleton
 public class Component {
     static Component com = new Component();
     ArrayList<Circle> circleList = new ArrayList<Circle>();
     ArrayList<Line> lineList = new ArrayList<Line>();
+    List<Location> location = new ArrayList<>();
 
     private Component(){}
 
@@ -40,5 +42,13 @@ public class Component {
 
     public ArrayList<Line> getLineList(){
         return lineList;
+    }
+
+    public void setLocationList(List<Location> list){
+        location = list;
+    }
+
+    public List<Location> getLocationList(){
+        return location;
     }
 }

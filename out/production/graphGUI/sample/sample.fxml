@@ -9,8 +9,8 @@
          <children>
             <Button fx:id="btn1" layoutX="52.0" layoutY="106.0" mnemonicParsing="false" onAction="#loadFile" prefHeight="43.0" prefWidth="163.0" text="Load" />
             <Button fx:id="btn2" layoutX="52.0" layoutY="396.0" mnemonicParsing="false" onAction="#basicSimulation" prefHeight="43.0" prefWidth="163.0" text="Basic" />
-            <Button layoutX="54.0" layoutY="471.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="163.0" text="Greedy" />
-            <Button layoutX="54.0" layoutY="547.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="163.0" text="MCTS" />
+            <Button fx:id="btn3" layoutX="54.0" layoutY="471.0" mnemonicParsing="false" onAction="#greedySimulation" prefHeight="43.0" prefWidth="163.0" text="Greedy" />
+            <Button fx:id="btn4" layoutX="54.0" layoutY="547.0" mnemonicParsing="false" onAction="#mctsSimulation" prefHeight="43.0" prefWidth="163.0" text="MCTS" />
          </children>
       </AnchorPane>
    </children>

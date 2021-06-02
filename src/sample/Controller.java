@@ -1,36 +1,35 @@
 package sample;
 
+import javafx.animation.PathTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
+import javafx.scene.shape.Polyline;
 import javafx.stage.FileChooser;
-import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.*;
 
 public class Controller extends AnchorPane {
-    List<Location> list = new ArrayList<>();
+
+    List<Location> list;
     Component com = Component.getInstance();
     ArrayList<Circle> circleList = new ArrayList<>();
     ArrayList<Line> lineList = new ArrayList<>();
-    Tooltip tooltip = new Tooltip();
     Circle circle;
     Line line;
     double xMax,yMax;
@@ -38,6 +37,10 @@ public class Controller extends AnchorPane {
     public Button btn2;
     public Button btn3;
     public Button btn4;
+
+    //for graph visualisation
+    ArrayList<Vehicle> vehicleList;
+    ArrayList<ImageView> truckList = new ArrayList<>();
 
     public void loadFile(ActionEvent event) throws Exception{
         FileChooser fc = new FileChooser();
@@ -53,6 +56,7 @@ public class Controller extends AnchorPane {
                 int maxCapacity = input.nextInt();
                 int xCoordinate = input.nextInt();
                 int yCoordinate = input.nextInt();
+                list = new ArrayList<>();
                 list.add(new Depot(numOfCustomers, maxCapacity, xCoordinate,yCoordinate)); //instantiate Depot
 
                 circle = new Circle();
@@ -123,6 +127,10 @@ public class Controller extends AnchorPane {
 
             com.setCircleList(circleList);
             com.setLineList(lineList);
+            com.setLocationList(list);
+
+            Location l = new Location();
+            l.resetSerial();
 
             window.setTitle("Always-On-Time");
             window.setResizable(false);
@@ -135,22 +143,76 @@ public class Controller extends AnchorPane {
     }
 
     public void basicSimulation(ActionEvent event) throws Exception{
-        Pane root2 = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        Stage window2 = (Stage) btn2.getScene().getWindow();
-        Scene scene2 = new Scene(root2,1000,700);
+        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Stage window = (Stage) btn2.getScene().getWindow();
+        Scene scene = new Scene(root,1000,700);
 
-        root2.getChildren().addAll(com.getLineList());
-        root2.getChildren().addAll(com.getCircleList());
+        root.getChildren().addAll(com.getLineList());
+        root.getChildren().addAll(com.getCircleList());
 
-        window2.setTitle("Always-On-Time");
-        window2.setResizable(false);
-        window2.setScene(scene2);
-        window2.show();
-
+        window.setTitle("Always-On-Time");
+        window.setResizable(false);
+        window.setScene(scene);
+        window.show();
     }
 
-    public void setText(){
+    public void greedySimulation(ActionEvent event) throws Exception{
+        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Stage window = (Stage) btn3.getScene().getWindow();
+        Scene scene = new Scene(root,1000,700);
+        circleList = com.getCircleList(); //to refer our truck points
+        Graph graph = new Graph(com.getLocationList());
+        vehicleList = graph.greedySearch();
+        for (int i = 0; i < vehicleList.size(); i++) {
+            Image image = new Image(new FileInputStream("truck24x24.png"));
+            ImageView img = new ImageView();
+            img.setImage(image);
 
+            Polyline polyline = new Polyline();
+            PathTransition transition = new PathTransition();
+            Double[] d = new Double[vehicleList.get(i).list.size()*2];
+            int j, k;
+            for ( j = 0, k = 0; j < vehicleList.get(i).list.size(); j++, k+=2) { //vehicle 1 = 0->1->2
+                d[k] = circleList.get(vehicleList.get(i).list.get(j).id).getCenterX();
+                d[k+1] = circleList.get(vehicleList.get(i).list.get(j).id).getCenterY();
+            }
+            k-=2;
+            d[k] = circleList.get(0).getCenterX();
+            d[k+1] = circleList.get(0).getCenterY();
+            polyline.getPoints().addAll(d);
+            transition.setNode(img);
+            transition.setDuration(Duration.seconds(10));
+            transition.setPath(polyline);
+            transition.setCycleCount(TranslateTransition.INDEFINITE);
+            transition.play();
+            truckList.add(img);
+        }
+        root.getChildren().addAll(com.getLineList());
+        root.getChildren().addAll(com.getCircleList());
+        root.getChildren().addAll(truckList);
+
+        window.setTitle("Always-On-Time");
+        window.setResizable(false);
+        window.setScene(scene);
+        window.show();
     }
+
+    public void mctsSimulation(ActionEvent event)throws Exception{
+        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Stage window = (Stage) btn4.getScene().getWindow();
+        Scene scene = new Scene(root,1000,700);
+
+        Graph graph = new Graph(com.getLocationList());
+        graph.displayVehicle(graph.greedySearch());
+
+        root.getChildren().addAll(com.getLineList());
+        root.getChildren().addAll(com.getCircleList());
+
+        window.setTitle("Always-On-Time");
+        window.setResizable(false);
+        window.setScene(scene);
+        window.show();
+    }
+
 
 }

@@ -6,7 +6,9 @@ public class Location{
     int yCoordinate;
     int demandSize;
     int id;
-    static int serial =0;
+    static int serial = 0;
+
+    public Location(){};
 
     public Location(int xCoordinate, int yCoordinate, int demandSize) {
         this.xCoordinate = xCoordinate;
@@ -14,6 +16,9 @@ public class Location{
         this.demandSize = demandSize;
         this.id = serial;
         serial++; //auto increment the ID whenever an instance of customer is created
+    }
 
+    public void resetSerial(){
+        serial = 0;
     }
 }
