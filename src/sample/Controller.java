@@ -49,7 +49,7 @@ public class Controller extends AnchorPane {
         if(selectedFile !=null){
             Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
             Stage window = (Stage) btn1.getScene().getWindow();
-            Scene scene = new Scene(root,1000,700);
+            Scene scene = new Scene(root,1200,1000);
             try {
                 Scanner input = new Scanner(new FileInputStream(selectedFile.getPath()));
                 int numOfCustomers = input.nextInt();
@@ -101,11 +101,11 @@ public class Controller extends AnchorPane {
                 System.out.println("File was not found");
             }
 
-            xMax = 729/xMax;
-            yMax = 700/yMax;
+            xMax = 935/xMax;
+            yMax = 1000/yMax;
 
             for (Circle c : circleList) {
-               c.setCenterX(275 + c.getCenterX()*(xMax-0.5));
+               c.setCenterX(265 + c.getCenterX()*(xMax-0.5));
                c.setCenterY((yMax-0.4) * c.getCenterY());
             }
             for (int i = 0; i <circleList.size(); i++) {
@@ -138,13 +138,12 @@ public class Controller extends AnchorPane {
         }else{
             System.out.println("Invalid File!");
         }
-
     }
 
     public void basicSimulation(ActionEvent event) throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn2.getScene().getWindow();
-        Scene scene = new Scene(root,1000,700);
+        Scene scene = new Scene(root,1200,1000);
 
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
@@ -160,14 +159,13 @@ public class Controller extends AnchorPane {
             int j, k;
             for ( j = 0, k = 0; j < vehicleList.get(i).list.size(); j++, k+=2) { //vehicle 1 = 0->1->2
                 if(j<vehicleList.get(i).list.size()-1){
-                    //setup line here!
                     line = new Line();
                     line.setStrokeWidth(1.4);
                     line.setStartX(circleList.get(vehicleList.get(i).list.get(j).id).getCenterX());
                     line.setStartY(circleList.get(vehicleList.get(i).list.get(j).id).getCenterY());
                     line.setEndX(circleList.get(vehicleList.get(i).list.get(j+1).id).getCenterX());
                     line.setEndY(circleList.get(vehicleList.get(i).list.get(j+1).id).getCenterY());
-                    line.setOpacity(0.7);
+                    line.setOpacity(0.5);
                     lineList.add(line);
                 }
                 d[k] = circleList.get(vehicleList.get(i).list.get(j).id).getCenterX();
@@ -185,7 +183,6 @@ public class Controller extends AnchorPane {
             truckList.add(img);
         }
 
-
         root.getChildren().addAll(lineList);
         root.getChildren().addAll(com.getCircleList());
         root.getChildren().addAll(truckList);
@@ -198,7 +195,7 @@ public class Controller extends AnchorPane {
     public void greedySimulation(ActionEvent event) throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn3.getScene().getWindow();
-        Scene scene = new Scene(root,1000,700);
+        Scene scene = new Scene(root,1200,1000);
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
         vehicleList = graph.greedySearch();
@@ -220,7 +217,7 @@ public class Controller extends AnchorPane {
                     line.setStartY(circleList.get(vehicleList.get(i).list.get(j).id).getCenterY());
                     line.setEndX(circleList.get(vehicleList.get(i).list.get(j+1).id).getCenterX());
                     line.setEndY(circleList.get(vehicleList.get(i).list.get(j+1).id).getCenterY());
-                    line.setOpacity(0.7);
+                    line.setOpacity(0.5);
                     lineList.add(line);
                 }
                 d[k] = circleList.get(vehicleList.get(i).list.get(j).id).getCenterX();
@@ -237,7 +234,6 @@ public class Controller extends AnchorPane {
             transition.play();
             truckList.add(img);
         }
-
         root.getChildren().addAll(lineList);
         root.getChildren().addAll(com.getCircleList());
         root.getChildren().addAll(truckList);
