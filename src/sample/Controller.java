@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -37,6 +40,7 @@ public class Controller extends AnchorPane {
     public Button btn2;
     public Button btn3;
     public Button btn4;
+    public ScrollPane sp;
 
     //for graph visualisation
     ArrayList<Vehicle> vehicleList;
@@ -148,6 +152,11 @@ public class Controller extends AnchorPane {
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
         vehicleList = graph.bfs2();
+
+        Label l = new Label(graph.sb.toString());
+        l.setFont(new Font("Avenir", 15));
+        sp.setContent(l);
+
         for (int i = 0; i < vehicleList.size(); i++) {
             Image image = new Image(new FileInputStream("truck24x24.png"));
             ImageView img = new ImageView();
@@ -182,7 +191,7 @@ public class Controller extends AnchorPane {
             transition.play();
             truckList.add(img);
         }
-
+        root.getChildren().add(sp);
         root.getChildren().addAll(lineList);
         root.getChildren().addAll(com.getCircleList());
         root.getChildren().addAll(truckList);
@@ -199,6 +208,12 @@ public class Controller extends AnchorPane {
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
         vehicleList = graph.greedySearch();
+
+        Label l = new Label(graph.sb.toString());
+        l.setFont(new Font("Avenir", 15));
+
+        sp.setContent(l);
+
         for (int i = 0; i < vehicleList.size(); i++) {
             Image image = new Image(new FileInputStream("truck24x24.png"));
             ImageView img = new ImageView();
@@ -234,6 +249,7 @@ public class Controller extends AnchorPane {
             transition.play();
             truckList.add(img);
         }
+        root.getChildren().add(sp);
         root.getChildren().addAll(lineList);
         root.getChildren().addAll(com.getCircleList());
         root.getChildren().addAll(truckList);
@@ -247,10 +263,18 @@ public class Controller extends AnchorPane {
     public void mctsSimulation(ActionEvent event)throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn4.getScene().getWindow();
-        Scene scene = new Scene(root,1000,700);
+        Scene scene = new Scene(root,1200,1000);
+        Label l1 = new Label("Hello world");
+        l1.setFont(new Font("Avenir", 20));
+        sp.setContent(l1);
 
-        Graph graph = new Graph(com.getLocationList());
-        graph.displayVehicle(graph.greedySearch());
+//        List<String> fontFamilies = Font.getFamilies();
+//        List<String> fontNames    = Font.getFontNames();
+//        System.out.println(fontNames.toString());
+
+//        Graph graph = new Graph(com.getLocationList());
+//        graph.displayVehicle(graph.greedySearch());
+        root.getChildren().add(sp);
 
         root.getChildren().addAll(com.getLineList());
         root.getChildren().addAll(com.getCircleList());
