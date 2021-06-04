@@ -264,20 +264,12 @@ public class Controller extends AnchorPane {
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn4.getScene().getWindow();
         Scene scene = new Scene(root,1200,1000);
-        Label l1 = new Label("Hello world");
-        l1.setFont(new Font("Avenir", 20));
-        sp.setContent(l1);
 
-//        List<String> fontFamilies = Font.getFamilies();
-//        List<String> fontNames    = Font.getFontNames();
-//        System.out.println(fontNames.toString());
+        Graph graph = new Graph(com.getLocationList());
+        graph.displayTour();
 
-//        Graph graph = new Graph(com.getLocationList());
-//        graph.displayVehicle(graph.greedySearch());
-        root.getChildren().add(sp);
-
-        root.getChildren().addAll(com.getLineList());
-        root.getChildren().addAll(com.getCircleList());
+//        root.getChildren().addAll(com.getLineList());
+//        root.getChildren().addAll(com.getCircleList());
 
         window.setTitle("Always-On-Time");
         window.setResizable(false);

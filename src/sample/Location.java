@@ -7,6 +7,8 @@ public class Location{
     int demandSize;
     int id;
     static int serial = 0;
+    boolean wasVisited;
+    boolean wasChecked;
 
     public Location(){};
 
@@ -16,6 +18,8 @@ public class Location{
         this.demandSize = demandSize;
         this.id = serial;
         serial++; //auto increment the ID whenever an instance of customer is created
+        wasVisited = false;
+        wasChecked = false;
     }
 
     public void resetSerial(){
