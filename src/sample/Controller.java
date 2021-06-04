@@ -1,5 +1,6 @@
 package sample;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.PathTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -37,11 +38,11 @@ public class Controller extends AnchorPane {
     Line line;
     double xMax,yMax;
     public Button btn1;
-    public Button btn2;
-    public Button btn3;
-    public Button btn4;
+    public JFXButton btn2;
+    public JFXButton btn3;
+    public JFXButton btn4;
+    public JFXButton btn5;
     public ScrollPane sp;
-
     //for graph visualisation
     ArrayList<Vehicle> vehicleList;
     ArrayList<ImageView> truckList = new ArrayList<>();
@@ -277,5 +278,7 @@ public class Controller extends AnchorPane {
         window.show();
     }
 
-
+    public void printTest(){
+        System.out.println("You hit me!");
+    }
 }
