@@ -30,7 +30,7 @@ import java.util.*;
 
 public class Controller extends AnchorPane {
 
-    List<Location> list;
+    ArrayList<Location> list;
     Component com = Component.getInstance();
     ArrayList<Circle> circleList = new ArrayList<>();
     ArrayList<Line> lineList = new ArrayList<>();
@@ -278,7 +278,62 @@ public class Controller extends AnchorPane {
         window.show();
     }
 
-    public void printTest(){
-        System.out.println("You hit me!");
+    public void aStarSimulation(ActionEvent event) throws Exception{
+        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Stage window = (Stage) btn5.getScene().getWindow();
+        Scene scene = new Scene(root,1200,1000);
+        circleList = com.getCircleList(); //to refer our truck points
+        Graph graph = new Graph(com.getLocationList());
+        vehicleList = graph.AStarSearch();
+
+        Label l = new Label(graph.sb.toString());
+        l.setFont(new Font("Avenir", 15));
+
+        sp.setContent(l);
+
+        for (int i = 0; i < vehicleList.size(); i++) {
+            Image image = new Image(new FileInputStream("truck24x24.png"));
+            ImageView img = new ImageView();
+            img.setImage(image);
+
+            Polyline polyline = new Polyline();
+            PathTransition transition = new PathTransition();
+            Double[] d = new Double[vehicleList.get(i).list.size()*2];
+            int j, k;
+            for ( j = 0, k = 0; j < vehicleList.get(i).list.size(); j++, k+=2) { //vehicle 1 = 0->1->2
+                if(j<vehicleList.get(i).list.size()-1){
+                    //setup line here!
+                    line = new Line();
+                    line.setStrokeWidth(1.4);
+                    line.setStartX(circleList.get(vehicleList.get(i).list.get(j).id).getCenterX());
+                    line.setStartY(circleList.get(vehicleList.get(i).list.get(j).id).getCenterY());
+                    line.setEndX(circleList.get(vehicleList.get(i).list.get(j+1).id).getCenterX());
+                    line.setEndY(circleList.get(vehicleList.get(i).list.get(j+1).id).getCenterY());
+                    line.setOpacity(0.5);
+                    lineList.add(line);
+                }
+                d[k] = circleList.get(vehicleList.get(i).list.get(j).id).getCenterX();
+                d[k+1] = circleList.get(vehicleList.get(i).list.get(j).id).getCenterY();
+            }
+            k-=2;
+            d[k] = circleList.get(0).getCenterX();
+            d[k+1] = circleList.get(0).getCenterY();
+            polyline.getPoints().addAll(d);
+            transition.setNode(img);
+            transition.setDuration(Duration.seconds(10));
+            transition.setPath(polyline);
+            transition.setCycleCount(TranslateTransition.INDEFINITE);
+            transition.play();
+            truckList.add(img);
+        }
+        root.getChildren().add(sp);
+        root.getChildren().addAll(lineList);
+        root.getChildren().addAll(com.getCircleList());
+        root.getChildren().addAll(truckList);
+
+        window.setTitle("Always-On-Time");
+        window.setResizable(false);
+        window.setScene(scene);
+        window.show();
     }
 }

@@ -13,7 +13,7 @@ public class Component {
     static Component com = new Component();
     ArrayList<Circle> circleList = new ArrayList<Circle>();
     ArrayList<Line> lineList = new ArrayList<Line>();
-    List<Location> location = new ArrayList<>();
+    ArrayList<Location> location = new ArrayList<>();
     ArrayList<ImageView> truckList = new ArrayList<>();
 
     private Component(){}
@@ -50,11 +50,11 @@ public class Component {
         return lineList;
     }
 
-    public void setLocationList(List<Location> list){
+    public void setLocationList(ArrayList<Location> list){
         location = list;
     }
 
-    public List<Location> getLocationList(){
+    public ArrayList<Location> getLocationList(){
         return location;
     }
 }

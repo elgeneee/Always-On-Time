@@ -51,7 +51,7 @@
                </font>
             </JFXButton>
             <Line endX="100.0" layoutX="136.0" layoutY="394.0" startX="-100.0" stroke="#c4c4c433" />
-            <JFXButton fx:id="btn5" layoutY="395.0" onAction="#printTest" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="A*" textFill="WHITE">
+            <JFXButton fx:id="btn5" layoutY="395.0" onAction="#aStarSimulation" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="A*" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>

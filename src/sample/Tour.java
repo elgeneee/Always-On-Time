@@ -9,6 +9,11 @@ public class Tour {
     ArrayList<LinkedList<Location>> route = new ArrayList<>(); // e.g. {0->1->3->0, 0->2->0}
     double[][] adjMatrix;
     List<Location> c;
+
+    public Tour(Double d){
+        tourCost = d;
+    }
+
     public Tour(double[][] adjMatrix, List<Location> c) {
         tourCost = 0;
         this.adjMatrix = adjMatrix;
@@ -52,8 +57,10 @@ public class Tour {
         tourCost = computeTourCost();
     }
 
-    public Location peekLast(){
-        return route.get(route.size()-1).peekLast();
+    public Location getLastStop(){
+        int routeSize = route.size()-1;
+        int linkedListRouteSize = route.get(routeSize).size()-1;
+        return route.get(routeSize).get(linkedListRouteSize);
     }
 
     public void addNewRoute(){
@@ -69,6 +76,23 @@ public class Tour {
             capacity += l.get(i).demandSize;
         }
         return capacity;
+    }
+
+    public double getTourCost() {
+        return tourCost;
+    }
+
+    public void setTourCost(double tourCost) {
+        this.tourCost = tourCost;
+    }
+
+    public int getRouteSize(){
+        return route.size();
+    }
+
+    public void addDepot(){
+        route.get(getRouteSize()-1).add(c.get(0));
+        tourCost = computeTourCost();
     }
 
     @Override
