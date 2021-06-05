@@ -37,7 +37,7 @@ public class Controller extends AnchorPane {
     Circle circle;
     Line line;
     double xMax,yMax;
-    public Button btn1;
+    public JFXButton btn1;
     public JFXButton btn2;
     public JFXButton btn3;
     public JFXButton btn4;

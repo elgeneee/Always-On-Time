@@ -2,6 +2,7 @@
     -fx-background-color: white;
     -fx-background-radius: 10px;
     -fx-text-fill:  #393351;
+    -fx-graphic: url("add.png");
 }
 
 #btn1:hover{
@@ -14,8 +15,8 @@
     -fx-outline-color: #ffffff;
     -fx-outline-width:2px;
     -fx-cursor: hand;
+    -fx-graphic: url("add2.png");
 }
-
 
 #btn2:hover{
     -fx-background-color: #5c5282;
