@@ -48,6 +48,7 @@ public class Controller extends AnchorPane {
     public Label label1;
     //for graph visualisation
     ArrayList<Vehicle> vehicleList;
+    Tour mctsTour;
     ArrayList<ImageView> truckList = new ArrayList<>();
 
     public void loadFile(ActionEvent event) throws Exception{
@@ -240,7 +241,6 @@ public class Controller extends AnchorPane {
             int j, k;
             for ( j = 0, k = 0; j < vehicleList.get(i).list.size(); j++, k+=2) { //vehicle 1 = 0->1->2
                 if(j<vehicleList.get(i).list.size()-1){
-                    //setup line here!
                     line = new Line();
                     line.setStrokeWidth(1.4);
                     line.setStartX(circleList.get(vehicleList.get(i).list.get(j).id).getCenterX());
@@ -280,18 +280,59 @@ public class Controller extends AnchorPane {
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn4.getScene().getWindow();
         Scene scene = new Scene(root,1200,1000);
-
+        circleList = com.getCircleList();
         Graph graph = new Graph(com.getLocationList());
         long start = System.nanoTime();
-//        vehicleList = graph.mctsSearch(3,1000);
+        mctsTour = graph.mctsSearch(3,100);
         long end = System.nanoTime();
         double elapsedTime = ((double)end - (double)start)/1000000000;
         label1.setText("Time Elapsed: " + String.format("%.2f",elapsedTime) + "s");
         label1.setFont(new Font("Avenir", 12));
-        graph.displayTour();
 
-//        root.getChildren().addAll(com.getLineList());
-//        root.getChildren().addAll(com.getCircleList());
+        Label l = new Label(mctsTour.toString());
+        l.setFont(new Font("Avenir", 15));
+
+        sp.setContent(l);
+
+        for (int i = 0; i < mctsTour.getRouteSize(); i++) {
+            Image image = new Image(new FileInputStream("truck24x24.png"));
+            ImageView img = new ImageView();
+            img.setImage(image);
+
+            Polyline polyline = new Polyline();
+            PathTransition transition = new PathTransition();
+            Double[] d = new Double[mctsTour.route.get(i).size()*2];
+            int j, k;
+            for ( j = 0, k = 0; j < mctsTour.route.get(i).size(); j++, k+=2) {
+                if(j<mctsTour.route.get(i).size()-1){
+                    line = new Line();
+                    line.setStrokeWidth(1.4);
+                    line.setStartX(circleList.get(mctsTour.route.get(i).get(j).id).getCenterX());
+                    line.setStartY(circleList.get(mctsTour.route.get(i).get(j).id).getCenterY());
+                    line.setEndX(circleList.get(mctsTour.route.get(i).get(j+1).id).getCenterX());
+                    line.setEndY(circleList.get(mctsTour.route.get(i).get(j+1).id).getCenterY());
+                    line.setOpacity(0.5);
+                    lineList.add(line);
+                }
+                d[k] = circleList.get(mctsTour.route.get(i).get(j).id).getCenterX();
+                d[k+1] = circleList.get(mctsTour.route.get(i).get(j).id).getCenterY();
+            }
+            k-=2;
+            d[k] = circleList.get(0).getCenterX();
+            d[k+1] = circleList.get(0).getCenterY();
+            polyline.getPoints().addAll(d);
+            transition.setNode(img);
+            transition.setDuration(Duration.seconds(10));
+            transition.setPath(polyline);
+            transition.setCycleCount(TranslateTransition.INDEFINITE);
+            transition.play();
+            truckList.add(img);
+        }
+        root.getChildren().add(label1);
+        root.getChildren().add(sp);
+        root.getChildren().addAll(lineList);
+        root.getChildren().addAll(com.getCircleList());
+        root.getChildren().addAll(truckList);
 
         window.setTitle("Always-On-Time");
         window.setResizable(false);

@@ -100,9 +100,9 @@ public class Tour {
         StringBuilder sb = new StringBuilder();
         sb.append("MCTS Simulation Tour\nTour Cost: " + tourCost);
         for (int i = 0; i < route.size(); i++) {
-            sb.append("\nVehicle " + (i+1) + "\n");
+            sb.append("\n\nVehicle " + (i+1) + "\n");
             for (int j = 0; j < route.get(i).size()-1; j++) {
-                sb.append(route.get(i).get(j).id + " -> ");
+                sb.append(route.get(i).get(j).id + " ➔ ");
             }
             sb.append("0\n");
             sb.append("Capacity: " + computeCapacity(route.get(i)) +"\nCost: " + computRouteCost(route.get(i)));
