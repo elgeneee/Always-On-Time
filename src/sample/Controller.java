@@ -6,7 +6,6 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
@@ -26,7 +25,6 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class Controller extends AnchorPane {
@@ -46,6 +44,7 @@ public class Controller extends AnchorPane {
     public JFXButton btn5;
     public ScrollPane sp;
     public Label label1;
+
     //for graph visualisation
     ArrayList<Vehicle> vehicleList;
     Tour mctsTour;
