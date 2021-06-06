@@ -26,6 +26,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Controller extends AnchorPane {
@@ -37,12 +38,14 @@ public class Controller extends AnchorPane {
     Circle circle;
     Line line;
     double xMax,yMax;
+
     public JFXButton btn1;
     public JFXButton btn2;
     public JFXButton btn3;
     public JFXButton btn4;
     public JFXButton btn5;
     public ScrollPane sp;
+    public Label label1;
     //for graph visualisation
     ArrayList<Vehicle> vehicleList;
     ArrayList<ImageView> truckList = new ArrayList<>();
@@ -152,7 +155,12 @@ public class Controller extends AnchorPane {
 
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
+        long start = System.nanoTime();
         vehicleList = graph.bfs2();
+        long end = System.nanoTime();
+        double elapsedTime = ((double)end - (double)start)/1000000000;
+        label1.setText("Time Elapsed: " + String.format("%.2f",elapsedTime) + "s");
+        label1.setFont(new Font("Avenir", 12));
 
         Label l = new Label(graph.sb.toString());
         l.setFont(new Font("Avenir", 15));
@@ -192,6 +200,7 @@ public class Controller extends AnchorPane {
             transition.play();
             truckList.add(img);
         }
+        root.getChildren().add(label1);
         root.getChildren().add(sp);
         root.getChildren().addAll(lineList);
         root.getChildren().addAll(com.getCircleList());
@@ -208,7 +217,12 @@ public class Controller extends AnchorPane {
         Scene scene = new Scene(root,1200,1000);
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
+        long start = System.nanoTime();
         vehicleList = graph.greedySearch();
+        long end = System.nanoTime();
+        double elapsedTime = ((double)end - (double)start)/1000000000;
+        label1.setText("Time Elapsed: " + String.format("%.2f",elapsedTime) + "s");
+        label1.setFont(new Font("Avenir", 12));
 
         Label l = new Label(graph.sb.toString());
         l.setFont(new Font("Avenir", 15));
@@ -250,6 +264,7 @@ public class Controller extends AnchorPane {
             transition.play();
             truckList.add(img);
         }
+        root.getChildren().add(label1);
         root.getChildren().add(sp);
         root.getChildren().addAll(lineList);
         root.getChildren().addAll(com.getCircleList());
@@ -267,6 +282,12 @@ public class Controller extends AnchorPane {
         Scene scene = new Scene(root,1200,1000);
 
         Graph graph = new Graph(com.getLocationList());
+        long start = System.nanoTime();
+//        vehicleList = graph.mctsSearch(3,1000);
+        long end = System.nanoTime();
+        double elapsedTime = ((double)end - (double)start)/1000000000;
+        label1.setText("Time Elapsed: " + String.format("%.2f",elapsedTime) + "s");
+        label1.setFont(new Font("Avenir", 12));
         graph.displayTour();
 
 //        root.getChildren().addAll(com.getLineList());
