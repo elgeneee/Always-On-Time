@@ -42,6 +42,7 @@ public class Controller extends AnchorPane {
     public JFXButton btn3;
     public JFXButton btn4;
     public JFXButton btn5;
+    public JFXButton btn6;
     public ScrollPane sp;
     public Label label1;
 
@@ -339,13 +340,18 @@ public class Controller extends AnchorPane {
         window.show();
     }
 
-    public void aStarSimulation(ActionEvent event) throws Exception{
+    public void bestFirstSearchSimulation(ActionEvent event) throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn5.getScene().getWindow();
         Scene scene = new Scene(root,1200,1000);
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
-        vehicleList = graph.AStarSearch();
+        long start = System.nanoTime();
+        vehicleList = graph.bestFirstSearch();
+        long end = System.nanoTime();
+        double elapsedTime = ((double)end - (double)start)/1000000000;
+        label1.setText("Time Elapsed: " + String.format("%.2f",elapsedTime) + "s");
+        label1.setFont(new Font("Avenir", 12));
 
         Label l = new Label(graph.sb.toString());
         l.setFont(new Font("Avenir", 15));
@@ -387,6 +393,72 @@ public class Controller extends AnchorPane {
             transition.play();
             truckList.add(img);
         }
+        root.getChildren().add(label1);
+        root.getChildren().add(sp);
+        root.getChildren().addAll(lineList);
+        root.getChildren().addAll(com.getCircleList());
+        root.getChildren().addAll(truckList);
+
+        window.setTitle("Always-On-Time");
+        window.setResizable(false);
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void aStarSimulation(ActionEvent event) throws Exception{
+        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Stage window = (Stage) btn6.getScene().getWindow();
+        Scene scene = new Scene(root,1200,1000);
+        circleList = com.getCircleList(); //to refer our truck points
+        Graph graph = new Graph(com.getLocationList());
+        long start = System.nanoTime();
+        vehicleList = graph.aStarSearch();
+        long end = System.nanoTime();
+        double elapsedTime = ((double)end - (double)start)/1000000000;
+        label1.setText("Time Elapsed: " + String.format("%.2f",elapsedTime) + "s");
+        label1.setFont(new Font("Avenir", 12));
+
+        Label l = new Label(graph.sb.toString());
+        l.setFont(new Font("Avenir", 15));
+
+        sp.setContent(l);
+
+        for (int i = 0; i < vehicleList.size(); i++) {
+            Image image = new Image(new FileInputStream("truck24x24.png"));
+            ImageView img = new ImageView();
+            img.setImage(image);
+
+            Polyline polyline = new Polyline();
+            PathTransition transition = new PathTransition();
+            Double[] d = new Double[vehicleList.get(i).list.size()*2];
+            int j, k;
+            for ( j = 0, k = 0; j < vehicleList.get(i).list.size(); j++, k+=2) { //vehicle 1 = 0->1->2
+                if(j<vehicleList.get(i).list.size()-1){
+                    //setup line here!
+                    line = new Line();
+                    line.setStrokeWidth(1.4);
+                    line.setStartX(circleList.get(vehicleList.get(i).list.get(j).id).getCenterX());
+                    line.setStartY(circleList.get(vehicleList.get(i).list.get(j).id).getCenterY());
+                    line.setEndX(circleList.get(vehicleList.get(i).list.get(j+1).id).getCenterX());
+                    line.setEndY(circleList.get(vehicleList.get(i).list.get(j+1).id).getCenterY());
+                    line.setOpacity(0.5);
+                    lineList.add(line);
+                }
+                d[k] = circleList.get(vehicleList.get(i).list.get(j).id).getCenterX();
+                d[k+1] = circleList.get(vehicleList.get(i).list.get(j).id).getCenterY();
+            }
+            k-=2;
+            d[k] = circleList.get(0).getCenterX();
+            d[k+1] = circleList.get(0).getCenterY();
+            polyline.getPoints().addAll(d);
+            transition.setNode(img);
+            transition.setDuration(Duration.seconds(10));
+            transition.setPath(polyline);
+            transition.setCycleCount(TranslateTransition.INDEFINITE);
+            transition.play();
+            truckList.add(img);
+        }
+        root.getChildren().add(label1);
         root.getChildren().add(sp);
         root.getChildren().addAll(lineList);
         root.getChildren().addAll(com.getCircleList());

@@ -320,7 +320,6 @@ public class Graph {
         }
         tourCost=vehicleDistribution(greedyList);
         //display output
-
         sb = new StringBuilder();
         sb.append("Greedy Simulation Tour\nTour Cost: " + tourCost + "\n");
         displayVehicle2(vehicleList);
@@ -328,49 +327,119 @@ public class Graph {
         return vehicleList;
     }
 
-    public ArrayList<Vehicle> AStarSearch(){
+    public ArrayList<Vehicle> bestFirstSearch(){
         tourCost = 0;
-        ArrayList<Location> closed = new ArrayList<>();  //a list storing visited by not yet expand node
-        ArrayList<Location> open = new ArrayList<>();   //a list storing visited and expanded node
-        List<Double> g= new ArrayList<>();  //a list storing straight line distance, h(n)
+        ArrayList<Location> closed = new ArrayList<>(); //a list storing visited by not yet expand node
+        ArrayList<Location> open = new ArrayList<>(); //a list storing visited and expanded node
+        List<Double> h = new ArrayList<>(); //a list storing straight line distance from current node to goal node, h(n)
         for (int i = 0; i < adjMatrix[0].length; i++) {
-            g.add(adjMatrix[0][i]);
+            h.add(adjMatrix[0][i]);
         }
-        for (int i = 0; i < g.size(); i++) {  //list that store location according to h(n)-> distance to goal node
+        for (int i = 0; i < h.size(); i++) {  //list that store location, according to h(n)
             closed.add(c.get(i));
         }
 
         open.add(closed.remove(0)); //start exploring with first node in open
-        double startToCurrent=0;
-        //f(n)=h(n)+g(n)
-        while(!closed.isEmpty()){ //must travel until closed list is all visited
-            List<Double> f=new ArrayList<>(); //first copy the distance to goal(depot)
-            Location current=open.get(open.size()-1); //expand the node chosen
-            int currentID=current.id;
-            double min=Double.POSITIVE_INFINITY;
-            int minIndex=0;
-            for (int i = 1; i <=closed.size(); i++) {
-                double h= startToCurrent+ adjMatrix[currentID][closed.get(i-1).id]+ g.get(i);   //distance from current node to next node
-                f.add(h); //set the heuristic function
-            }
-            for (int i = 0; i < f.size(); i++) {
-                if(f.get(i)<min){
-                    min=f.get(i);
-                    minIndex=i;
+        h.remove(0);
+        //f(n) = h(n)
+        int currentRouteCapacity = 0;
+        while (!closed.isEmpty()) {
+            double hMIN = Double.POSITIVE_INFINITY;
+            int closedID = -1; //-1 means nextStop not found
+            for (int i = 0; i < closed.size(); i++) { //to find best possible nextStop
+                //condition 1: lowest h(n) among latest list of closed
+                //condition 2: if add this nextStop does not exceed maximumCapacity
+                if (h.get(i) < hMIN && currentRouteCapacity + closed.get(i).demandSize <= d.maximumCapacity) {
+                    hMIN = h.get(i);
+                    closedID = i;
                 }
             }
-            startToCurrent+=adjMatrix[currentID][closed.get(minIndex).id];
-            open.add(closed.remove(minIndex));//the node is being visited and expanded, remove from closed
-            g.remove(minIndex);
+            if (closedID != -1) {
+                currentRouteCapacity += closed.get(closedID).demandSize;
+                open.add(closed.remove(closedID));
+                h.remove(closedID);
+            }
+            else { //new route, reset data of route
+                currentRouteCapacity = 0;
+            }
+        }
+        open.remove(0);
+
+        tourCost=vehicleDistribution(open);
+        //display output
+        sb = new StringBuilder();
+        sb.append("Best First Search Simulation Tour\nTour Cost: " + tourCost + "\n");
+        displayVehicle2(vehicleList);
+        resetVisited();
+        return vehicleList;
+    }
+
+    public ArrayList<Vehicle>  aStarSearch() {
+        tourCost = 0;
+        ArrayList<Location> open = new ArrayList<>(); //keeps all nodes that are discovered but not yet expanded
+        ArrayList<Location> result = new ArrayList<>();
+        //store c in open
+        for (int i = 0; i<c.size(); i++) {
+            open.add(c.get(i));
         }
 
-        open.remove(0);
-        tourCost=vehicleDistribution(open);
+        //f(n) = g(n) + h(n)
+        //g(n) = actual cost from start to current
+        //h(n) = estimated cost from current to goal in straight line
+        double f = 0;
+        double g = 0;
+        ArrayList<Double> h = new ArrayList<>(); //list that keeps h(n) values of all nodes
+        //store values of h(n)
+        for (int i = 0; i< open.size(); i++) {
+            h.add(adjMatrix[i][0]);
+        }
 
+        result.add(open.remove(0)); //add depot to start
+        h.remove(0);
+        Location currentStop = result.get(result.size() - 1);
+
+        int maxCapacity = d.maximumCapacity;
+        int currentRouteCapacity = 0;
+
+        while (!open.isEmpty()) {
+            double fMIN = Double.POSITIVE_INFINITY;
+
+            int openID = -1; //-1 means nextStop not found
+            double gTemp = g + 0; //temporary g(n) until nextStop
+            for (int i = 0; i<open.size(); i++) { //to find best possible nextStop
+                Location nextStop = open.get(i);
+                gTemp = g + adjMatrix[currentStop.id][nextStop.id];
+                f = gTemp + h.get(i);
+
+                //condition 1: lowest f(n) among latest list of open
+                //condition 2: if add this nextStop does not exceed maximumCapacity
+                if (f < fMIN && currentRouteCapacity + open.get(i).demandSize <= maxCapacity) {
+                    fMIN = f;
+                    openID = i;
+                }
+            }
+            if (openID != -1) {
+                result.add(open.remove(openID));
+                h.remove(openID);
+                currentStop = result.get(result.size() - 1); //refresh currentStop
+                currentRouteCapacity += result.get(result.size() - 1).demandSize;
+                g = gTemp; //update g(n) until nextStop
+            }
+            else { //new route, reset data of route
+                currentStop = result.get(0); //restart currentStop at depot, but not added into (ArrayList) result
+                currentRouteCapacity = 0;
+                f = 0;
+                g = 0;
+            }
+        }
+        result.remove(0);
+
+        tourCost=vehicleDistribution(result);
         //display output
         sb = new StringBuilder();
         sb.append("A* Search Simulation Tour\nTour Cost: " + tourCost + "\n");
         displayVehicle2(vehicleList);
+        resetVisited();
         return vehicleList;
     }
 
