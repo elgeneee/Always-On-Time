@@ -22,7 +22,7 @@
                   <Image url="@../sample/logoTitle.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btn1" layoutX="44.0" layoutY="150.0" onAction="#loadFile" prefHeight="46.0" prefWidth="179.0" stylesheets="@../CSS/Button.css" text="LOAD" textFill="WHITE">
+            <JFXButton fx:id="btn1" layoutX="44.0" layoutY="150.0" onAction="#loadFile" prefHeight="46.0" prefWidth="179.0" stylesheets="@../CSS/Button.css" text="UPLOAD" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="16.0" />
                </font>
@@ -33,31 +33,37 @@
                   <Shadow />
                </effect>
             </JFXButton>
-            <JFXButton fx:id="btn2" layoutY="254.0" onAction="#basicSimulation" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Basic" textFill="WHITE">
+            <JFXButton fx:id="btn2" layoutY="254.0" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Basic" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>
             </JFXButton>
             <Line endX="100.0" layoutX="135.0" layoutY="301.0" startX="-100.0" stroke="#c4c4c433" />
-            <JFXButton fx:id="btn3" layoutY="302.0" onAction="#greedySimulation" prefHeight="44.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Greedy" textFill="WHITE">
+            <JFXButton fx:id="btn3" layoutY="302.0" prefHeight="44.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Greedy" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>
             </JFXButton>
             <Line endX="100.0" layoutX="136.0" layoutY="347.0" startX="-100.0" stroke="#c4c4c433" />
-            <JFXButton fx:id="btn4" layoutY="348.0" onAction="#mctsSimulation" prefHeight="45.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="MCTS" textFill="WHITE">
+            <JFXButton fx:id="btn4" layoutY="348.0" prefHeight="45.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="MCTS" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>
             </JFXButton>
             <Line endX="100.0" layoutX="136.0" layoutY="394.0" startX="-100.0" stroke="#c4c4c433" />
-            <JFXButton fx:id="btn5" layoutY="395.0" onAction="#aStarSimulation" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="A*" textFill="WHITE">
+            <JFXButton fx:id="btn5" layoutY="395.0" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Best First Search" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>
             </JFXButton>
+            <Line endX="100.0" layoutX="136.0" layoutY="441.0" startX="-100.0" stroke="#c4c4c433" />
             <Label fx:id="label1" layoutX="12.0" layoutY="519.0" prefHeight="17.0" prefWidth="121.0" textFill="WHITE" />
             <ScrollPane fx:id="sp" layoutX="10.0" layoutY="543.0" prefHeight="443.0" prefWidth="245.0" stylesheets="@../CSS/Button.css" />
+            <JFXButton fx:id="btn6" layoutY="442.0" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="A*" textFill="WHITE">
+               <font>
+                  <Font name="Avenir Next Bold" size="17.0" />
+               </font>
+            </JFXButton>
          </children>
       </AnchorPane>
       <ImageView fitHeight="361.0" fitWidth="445.0" layoutX="517.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
@@ -65,7 +71,7 @@
             <Image url="@no_data.png" />
          </image>
       </ImageView>
-      <Label layoutX="636.0" layoutY="527.0" text="Click 'Load' to load a graph" textFill="#9e9c9c">
+      <Label layoutX="636.0" layoutY="527.0" text="Click 'Upload' to load a graph" textFill="#9e9c9c">
          <font>
             <Font name="Avenir Book" size="17.0" />
          </font>

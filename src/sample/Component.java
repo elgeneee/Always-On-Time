@@ -15,6 +15,7 @@ public class Component {
     ArrayList<Line> lineList = new ArrayList<Line>();
     ArrayList<Location> location = new ArrayList<>();
     ArrayList<ImageView> truckList = new ArrayList<>();
+    Tour mctsTour;
 
     private Component(){}
 
@@ -56,5 +57,13 @@ public class Component {
 
     public ArrayList<Location> getLocationList(){
         return location;
+    }
+
+    public void setMctsTour(Tour t){
+        mctsTour = t;
+    }
+
+    public Tour getMctsTour() {
+        return mctsTour;
     }
 }

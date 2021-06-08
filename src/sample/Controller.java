@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Controller extends AnchorPane {
 
@@ -136,6 +137,9 @@ public class Controller extends AnchorPane {
             com.setCircleList(circleList);
             com.setLineList(lineList);
             com.setLocationList(list);
+
+            Graph graph = new Graph(com.getLocationList());
+            graph.start();
 
             Location l = new Location();
             l.resetSerial();
@@ -283,7 +287,10 @@ public class Controller extends AnchorPane {
         circleList = com.getCircleList();
         Graph graph = new Graph(com.getLocationList());
         long start = System.nanoTime();
-        mctsTour = graph.mctsSearch(3,100);
+        while(com.getMctsTour()==null){
+            TimeUnit.MILLISECONDS.sleep(1);
+        }
+        mctsTour = com.getMctsTour();
         long end = System.nanoTime();
         double elapsedTime = ((double)end - (double)start)/1000000000;
         label1.setText("Time Elapsed: " + String.format("%.2f",elapsedTime) + "s");

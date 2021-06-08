@@ -3,7 +3,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
-public class Graph {
+public class Graph extends Thread{
     double adjMatrix[][];
     int numOfVehicles;
     Depot d;
@@ -25,6 +25,9 @@ public class Graph {
     ArrayList<Location> location;
     Tour best_tour = new Tour(Double.POSITIVE_INFINITY);
     int timeLimit = 60;
+
+    //params for threading
+    Component com = Component.getInstance();
 
     public Graph(ArrayList<Location> c){
         this.c = c;
@@ -49,23 +52,29 @@ public class Graph {
         location = (ArrayList<Location>) c.clone();
     }
 
-    public void displayEdges(){
-        for (int i = 0; i < adjMatrix.length; i++) {
-            for (int j = 0; j < adjMatrix.length; j++) {
-                System.out.print(adjMatrix[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
+//    public void displayEdges(){
+//        for (int i = 0; i < adjMatrix.length; i++) {
+//            for (int j = 0; j < adjMatrix.length; j++) {
+//                System.out.print(adjMatrix[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
+//    }
+//
+//    public int getAdjUnvisitedVertex(int v){
+//        for (int i = 1; i < c.size(); i++) {
+//            Customer cus=(Customer)c.get(i);  //Always need to downcast
+//            if(!cus.wasVisited && adjMatrix[v][i]>0){
+//                return c.get(i).id;
+//            }
+//        }
+//        return -1;
+//    }
 
-    public int getAdjUnvisitedVertex(int v){
-        for (int i = 1; i < c.size(); i++) {
-            Customer cus=(Customer)c.get(i);  //Always need to downcast
-            if(!cus.wasVisited && adjMatrix[v][i]>0){
-                return c.get(i).id;
-            }
-        }
-        return -1;
+
+    @Override
+    public void run() {
+        com.setMctsTour(mctsSearch(3,100));
     }
 
     public ArrayList<Vehicle> bfs2(){
@@ -247,6 +256,7 @@ public class Graph {
 //        System.out.println("Basic Simulation Tour" + "\nTour Cost: " + tourCost);
 //        displayVehicle(vehicleList);
 //    }
+
 
     public boolean completeVisited(){
         for (int i = 1; i < c.size(); i++) {
