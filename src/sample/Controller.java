@@ -115,8 +115,8 @@ public class Controller extends AnchorPane {
             yMax = 1000/yMax;
 
             for (Circle c : circleList) {
-               c.setCenterX(265 + c.getCenterX()*(xMax-0.5));
-               c.setCenterY((yMax-0.4) * c.getCenterY());
+                c.setCenterX(265 + c.getCenterX()*(xMax-0.5));
+                c.setCenterY((yMax-0.4) * c.getCenterY());
             }
             for (int i = 0; i <circleList.size(); i++) {
                 for (int j = i + 1; j < circleList.size(); j++) {
@@ -161,13 +161,13 @@ public class Controller extends AnchorPane {
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
         long start = System.nanoTime();
-        vehicleList = graph.bfs2();
+        vehicleList = graph.dfs();
         long end = System.nanoTime();
         double elapsedTime = ((double)end - (double)start)/1000000000;
         label1.setText("Time Elapsed: " + String.format("%.2f",elapsedTime) + "s");
         label1.setFont(new Font("Avenir", 12));
 
-        Label l = new Label(graph.sb.toString());
+        Label l = new Label("hello");
         l.setFont(new Font("Avenir", 15));
         sp.setContent(l);
 

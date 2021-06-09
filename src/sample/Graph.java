@@ -7,7 +7,7 @@ public class Graph extends Thread{
     double adjMatrix[][];
     int numOfVehicles;
     Depot d;
-    ArrayList<Location> c;  //depot at index 0 , customer continue 1-4
+    ArrayList<Location> c;
     double dist;
     Queue<Integer> q;
     LinkedList<Location> linkedList = new LinkedList<>();
@@ -288,6 +288,116 @@ public class Graph extends Thread{
             sb.append("\nVehicle " + i +"\n" + vehicleList.get(i-1) + "\n");
         }
         return sb.toString();
+    }
+
+    ArrayList<Integer> bestPath;
+    double bestCost;
+    Instant startTime;
+    public ArrayList<Vehicle> dfs(){
+        bestCost = Double.POSITIVE_INFINITY;
+        bestPath = new ArrayList<>();
+        startTime=Instant.now();
+        vehicleList.clear();
+        ArrayList<Integer> tempPath=new ArrayList<>();
+        ArrayList<Integer> adjList [] =new ArrayList[c.size()];
+        for (int i = 0; i < c.size(); ++i) {
+            adjList[i]=new ArrayList<>();
+        }
+        for (int i = 0; i < adjList.length; ++i) {  //form adjacency list
+            for (int j = 1; j <c.size(); j++) {
+                //for every adjList[] , they have their own list storing their neighbor excluding itself
+                if(j!=i)
+                    adjList[i].add(j);
+            }
+        }
+
+        bestPath=depthFirstSearch(0,adjList,tempPath);
+
+        linkedList.clear();
+        int  currentLoad=0;
+        linkedList.add(c.get(0));
+        double capacity=d.maximumCapacity;
+        int index=1;
+        for (int i = index; i <bestPath.size(); i++) {  //separate the minCost path into different vehicle
+            if(currentLoad+c.get(bestPath.get(i)).demandSize<=d.maximumCapacity) {
+                linkedList.add(c.get(bestPath.get(i)));
+                currentLoad+=c.get(bestPath.get(i)).demandSize;
+
+                continue;
+            }
+            linkedList.add(c.get(0));
+            routeCost = computeRouteCost(linkedList);
+            vehicleList.add(new Vehicle(linkedList, routeCost,currentLoad));
+            linkedList.clear();
+            currentLoad=0;
+            linkedList.add(c.get(0));
+            i--;
+        }
+        linkedList.add(c.get(0));
+        routeCost = computeRouteCost(linkedList);
+        vehicleList.add(new Vehicle(linkedList, routeCost,currentLoad));
+
+        //display output
+        sb = new StringBuilder();
+        sb.append("Basic Simulation Tour\nTour Cost: " + bestCost + "\n");
+        displayVehicle2(vehicleList);
+
+        return vehicleList;
+    }
+
+    public ArrayList<Integer> depthFirstSearch(Integer node,ArrayList<Integer> adjList[] ,ArrayList<Integer> tempPath){
+        tempPath.add(node);
+        if(node!=0)
+            ((Customer)c.get(node)).wasVisited=true;
+
+        //base case + calculate pathCost
+        if(completeVisited()){ //form a path consist of every customer, compare if it is a cheaper path
+            double tempCost=0;
+            int currentNode=0;
+            int nextNode=0;
+            int remainingCapacity=d.maximumCapacity;
+            for (int i = 0; i < tempPath.size()-1; i++) {
+                currentNode=tempPath.get(i);
+                nextNode=tempPath.get(i+1);
+                if(remainingCapacity-c.get(nextNode).demandSize>0) {
+                    tempCost += adjMatrix[currentNode][nextNode];
+                }
+                else {
+                    tempCost += adjMatrix[currentNode][0];
+                    tempCost += adjMatrix[0][nextNode];
+                    remainingCapacity=d.maximumCapacity;
+
+                }
+                remainingCapacity-=c.get(nextNode).demandSize;
+            }
+            tempCost+= adjMatrix[nextNode][0];//back to depot
+            if(tempCost<=bestCost){
+                bestPath.clear();
+                for (int i = 0; i < tempPath.size(); i++) {
+                    bestPath.add(tempPath.get(i));
+                }
+                bestCost=tempCost;
+            }
+            ((Customer)c.get(node)).wasVisited=false;
+
+            return tempPath;
+        }
+
+        for (int i = 0; i < adjList[node].size(); i++) {
+            int nextNode=adjList[node].get(i);
+
+            if(!((Customer)c.get(nextNode)).wasVisited) {
+                depthFirstSearch(nextNode, adjList,tempPath);
+                if(Duration.between(startTime,Instant.now()).getSeconds()>=60)
+                    return bestPath;
+
+                tempPath.remove(tempPath.size()-1);
+            }
+        }
+        if(node!=0)
+            ((Customer)c.get(node)).wasVisited=false;
+
+        return bestPath;
     }
 
     public ArrayList<Vehicle> greedySearch(){
