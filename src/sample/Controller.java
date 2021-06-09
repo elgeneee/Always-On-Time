@@ -167,7 +167,7 @@ public class Controller extends AnchorPane {
         label1.setText("Time Elapsed: " + String.format("%.2f",elapsedTime) + "s");
         label1.setFont(new Font("Avenir", 12));
 
-        Label l = new Label("hello");
+        Label l = new Label(graph.sb.toString());
         l.setFont(new Font("Avenir", 15));
         sp.setContent(l);
 
@@ -285,7 +285,6 @@ public class Controller extends AnchorPane {
         Stage window = (Stage) btn4.getScene().getWindow();
         Scene scene = new Scene(root,1200,1000);
         circleList = com.getCircleList();
-        Graph graph = new Graph(com.getLocationList());
         long start = System.nanoTime();
         while(com.getMctsTour()==null){
             TimeUnit.MILLISECONDS.sleep(1);

@@ -8,7 +8,7 @@ import javafx.scene.shape.Line;
 import java.util.ArrayList;
 import java.util.List;
 
-//a singleton
+//singleton class
 public class Component {
     static Component com = new Component();
     ArrayList<Circle> circleList = new ArrayList<Circle>();
@@ -16,6 +16,9 @@ public class Component {
     ArrayList<Location> location = new ArrayList<>();
     ArrayList<ImageView> truckList = new ArrayList<>();
     Tour mctsTour;
+
+    ArrayList<Vehicle> dfsVehicleList = new ArrayList<>();
+    StringBuilder dfsInfo = new StringBuilder();
 
     private Component(){}
 
@@ -65,5 +68,25 @@ public class Component {
 
     public Tour getMctsTour() {
         return mctsTour;
+    }
+
+    public void clearMCTSTour(){
+        mctsTour = null;
+    }
+
+    public ArrayList<Vehicle> getDfsVehicleList() {
+        return dfsVehicleList;
+    }
+
+    public void setDfsVehicleList(ArrayList<Vehicle> dfsVehicleList) {
+        this.dfsVehicleList = dfsVehicleList;
+    }
+
+    public StringBuilder getDfsInfo() {
+        return dfsInfo;
+    }
+
+    public void setDfsInfo(StringBuilder dfsInfo) {
+        this.dfsInfo = dfsInfo;
     }
 }

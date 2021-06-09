@@ -74,6 +74,7 @@ public class Graph extends Thread{
 
     @Override
     public void run() {
+        com.clearMCTSTour();
         com.setMctsTour(mctsSearch(3,100));
     }
 
