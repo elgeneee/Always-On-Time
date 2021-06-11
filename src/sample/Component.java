@@ -6,7 +6,6 @@ import javafx.scene.shape.Line;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 //singleton class
 public class Component {
@@ -80,13 +79,5 @@ public class Component {
 
     public void setDfsVehicleList(ArrayList<Vehicle> dfsVehicleList) {
         this.dfsVehicleList = dfsVehicleList;
-    }
-
-    public StringBuilder getDfsInfo() {
-        return dfsInfo;
-    }
-
-    public void setDfsInfo(StringBuilder dfsInfo) {
-        this.dfsInfo = dfsInfo;
     }
 }

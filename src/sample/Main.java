@@ -11,7 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("home.fxml"));
         Stage stage = new Stage();
-        Scene scene = new Scene(root, 1200, 1000);
+        Scene scene = new Scene(root, 1100, 750);
 
         stage.setTitle("Always-On-Time");
         stage.setResizable(false);

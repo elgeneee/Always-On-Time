@@ -59,7 +59,7 @@ public class Controller extends AnchorPane {
         if(selectedFile !=null){
             Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
             Stage window = (Stage) btn1.getScene().getWindow();
-            Scene scene = new Scene(root,1200,1000);
+            Scene scene = new Scene(root,1100,750);
             try {
                 Scanner input = new Scanner(new FileInputStream(selectedFile.getPath()));
                 int numOfCustomers = input.nextInt();
@@ -111,8 +111,8 @@ public class Controller extends AnchorPane {
                 System.out.println("File was not found");
             }
 
-            xMax = 935/xMax;
-            yMax = 1000/yMax;
+            xMax = 835/xMax;
+            yMax = 750/yMax;
 
             for (Circle c : circleList) {
                 c.setCenterX(265 + c.getCenterX()*(xMax-0.5));
@@ -156,7 +156,7 @@ public class Controller extends AnchorPane {
     public void basicSimulation(ActionEvent event) throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn2.getScene().getWindow();
-        Scene scene = new Scene(root,1200,1000);
+        Scene scene = new Scene(root,1100,750);
 
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
@@ -219,7 +219,7 @@ public class Controller extends AnchorPane {
     public void greedySimulation(ActionEvent event) throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn3.getScene().getWindow();
-        Scene scene = new Scene(root,1200,1000);
+        Scene scene = new Scene(root,1100,750);
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
         long start = System.nanoTime();
@@ -283,7 +283,7 @@ public class Controller extends AnchorPane {
     public void mctsSimulation(ActionEvent event)throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn4.getScene().getWindow();
-        Scene scene = new Scene(root,1200,1000);
+        Scene scene = new Scene(root,1100,750);
         circleList = com.getCircleList();
         long start = System.nanoTime();
         while(com.getMctsTour()==null){
@@ -349,7 +349,7 @@ public class Controller extends AnchorPane {
     public void bestFirstSearchSimulation(ActionEvent event) throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn5.getScene().getWindow();
-        Scene scene = new Scene(root,1200,1000);
+        Scene scene = new Scene(root,1100,750);
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
         long start = System.nanoTime();
@@ -414,7 +414,7 @@ public class Controller extends AnchorPane {
     public void aStarSimulation(ActionEvent event) throws Exception{
         Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Stage window = (Stage) btn6.getScene().getWindow();
-        Scene scene = new Scene(root,1200,1000);
+        Scene scene = new Scene(root,1100,750);
         circleList = com.getCircleList(); //to refer our truck points
         Graph graph = new Graph(com.getLocationList());
         long start = System.nanoTime();

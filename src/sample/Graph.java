@@ -732,9 +732,4 @@ public class Graph extends Thread{
         }
         return possible_successors.get(j);
     }
-
-    public void displayTour(){
-        System.out.println(mctsSearch(3,100));
-    }
-
 }
