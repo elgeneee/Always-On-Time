@@ -2,13 +2,13 @@ package sample;
 
 
 public class Location{
-    int xCoordinate;
-    int yCoordinate;
-    int demandSize;
-    int id;
+    public int xCoordinate;
+    public int yCoordinate;
+    public int demandSize;
+    public int id;
     static int serial = 0;
-    boolean wasVisited;
-    boolean wasChecked;
+    public boolean wasVisited;
+    public boolean wasChecked;
 
     public Location(){};
 

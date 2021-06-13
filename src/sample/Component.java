@@ -10,11 +10,11 @@ import java.util.ArrayList;
 //singleton class
 public class Component {
     static Component com = new Component();
-    ArrayList<Circle> circleList = new ArrayList<Circle>();
-    ArrayList<Line> lineList = new ArrayList<Line>();
-    ArrayList<Location> location = new ArrayList<>();
-    ArrayList<ImageView> truckList = new ArrayList<>();
-    Tour mctsTour;
+    public ArrayList<Circle> circleList = new ArrayList<Circle>();
+    public ArrayList<Line> lineList = new ArrayList<Line>();
+    public ArrayList<Location> location = new ArrayList<>();
+    public ArrayList<ImageView> truckList = new ArrayList<>();
+    public Tour mctsTour;
 
     ArrayList<Vehicle> dfsVehicleList = new ArrayList<>();
     StringBuilder dfsInfo = new StringBuilder();

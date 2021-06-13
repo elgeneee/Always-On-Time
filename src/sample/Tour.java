@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Tour {
-    double tourCost;
-    ArrayList<LinkedList<Location>> route = new ArrayList<>(); // e.g. {0->1->3->0, 0->2->0}
-    double[][] adjMatrix;
-    List<Location> c;
+    public double tourCost;
+    public ArrayList<LinkedList<Location>> route = new ArrayList<>(); // e.g. {0->1->3->0, 0->2->0}
+    public double[][] adjMatrix;
+    public List<Location> c;
 
     public Tour(Double d){
         tourCost = d;

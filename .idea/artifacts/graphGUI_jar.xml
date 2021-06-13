@@ -2,7 +2,7 @@
   <artifact type="jar" name="graphGUI:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/graphGUI_jar</output-path>
     <root id="archive" name="graphGUI.jar">
-      <element id="module-output" name="graphGUI" />
+      <element id="module-output" name="Always-On-Time" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/jfoenix-9.0.10.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.web.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.swing.jar" path-in-jar="/" />

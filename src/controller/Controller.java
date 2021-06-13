@@ -1,4 +1,4 @@
-package sample;
+package controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.PathTransition;
@@ -21,11 +21,13 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Controller extends AnchorPane {
@@ -58,7 +60,7 @@ public class Controller extends AnchorPane {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         File selectedFile = fc.showOpenDialog(null);
         if(selectedFile !=null){
-            Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+            Pane root = FXMLLoader.load(getClass().getResource("/view/sample.fxml"));
             Stage window = (Stage) btn1.getScene().getWindow();
             Scene scene = new Scene(root,1100,750);
             try {
@@ -155,7 +157,7 @@ public class Controller extends AnchorPane {
     }
 
     public void basicSimulation(ActionEvent event) throws Exception{
-        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Pane root = FXMLLoader.load(getClass().getResource("/view/sample.fxml"));
         Stage window = (Stage) btn2.getScene().getWindow();
         Scene scene = new Scene(root,1100,750);
 
@@ -173,7 +175,7 @@ public class Controller extends AnchorPane {
         sp.setContent(l);
 
         for (int i = 0; i < vehicleList.size(); i++) {
-            Image image = new Image(new FileInputStream("truck24x24.png"));
+            Image image = new Image(new FileInputStream("src/res/truck24x24.png"));
             ImageView img = new ImageView();
             img.setImage(image);
 
@@ -218,7 +220,7 @@ public class Controller extends AnchorPane {
     }
 
     public void greedySimulation(ActionEvent event) throws Exception{
-        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Pane root = FXMLLoader.load(getClass().getResource("/view/sample.fxml"));
         Stage window = (Stage) btn3.getScene().getWindow();
         Scene scene = new Scene(root,1100,750);
         circleList = com.getCircleList(); //to refer our truck points
@@ -236,7 +238,7 @@ public class Controller extends AnchorPane {
         sp.setContent(l);
 
         for (int i = 0; i < vehicleList.size(); i++) {
-            Image image = new Image(new FileInputStream("truck24x24.png"));
+            Image image = new Image(new FileInputStream("src/res/truck24x24.png"));
             ImageView img = new ImageView();
             img.setImage(image);
 
@@ -282,7 +284,7 @@ public class Controller extends AnchorPane {
     }
 
     public void mctsSimulation(ActionEvent event)throws Exception{
-        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Pane root = FXMLLoader.load(getClass().getResource("/view/sample.fxml"));
         Stage window = (Stage) btn4.getScene().getWindow();
         Scene scene = new Scene(root,1100,750);
         circleList = com.getCircleList();
@@ -302,7 +304,7 @@ public class Controller extends AnchorPane {
         sp.setContent(l);
 
         for (int i = 0; i < mctsTour.getRouteSize(); i++) {
-            Image image = new Image(new FileInputStream("truck24x24.png"));
+            Image image = new Image(new FileInputStream("src/res/truck24x24.png"));
             ImageView img = new ImageView();
             img.setImage(image);
 
@@ -348,7 +350,7 @@ public class Controller extends AnchorPane {
     }
 
     public void bestFirstSearchSimulation(ActionEvent event) throws Exception{
-        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Pane root = FXMLLoader.load(getClass().getResource("/view/sample.fxml"));
         Stage window = (Stage) btn5.getScene().getWindow();
         Scene scene = new Scene(root,1100,750);
         circleList = com.getCircleList(); //to refer our truck points
@@ -366,7 +368,7 @@ public class Controller extends AnchorPane {
         sp.setContent(l);
 
         for (int i = 0; i < vehicleList.size(); i++) {
-            Image image = new Image(new FileInputStream("truck24x24.png"));
+            Image image = new Image(new FileInputStream("src/res/truck24x24.png"));
             ImageView img = new ImageView();
             img.setImage(image);
 
@@ -413,7 +415,7 @@ public class Controller extends AnchorPane {
     }
 
     public void aStarSimulation(ActionEvent event) throws Exception{
-        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Pane root = FXMLLoader.load(getClass().getResource("/view/sample.fxml"));
         Stage window = (Stage) btn6.getScene().getWindow();
         Scene scene = new Scene(root,1100,750);
         circleList = com.getCircleList(); //to refer our truck points
@@ -431,7 +433,7 @@ public class Controller extends AnchorPane {
         sp.setContent(l);
 
         for (int i = 0; i < vehicleList.size(); i++) {
-            Image image = new Image(new FileInputStream("truck24x24.png"));
+            Image image = new Image(new FileInputStream("src/res/truck24x24.png"));
             ImageView img = new ImageView();
             img.setImage(image);
 
@@ -478,7 +480,7 @@ public class Controller extends AnchorPane {
     }
 
     public void dijkstra(ActionEvent event) throws Exception{
-        Pane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Pane root = FXMLLoader.load(getClass().getResource("/view/sample.fxml"));
         Stage window = (Stage) btn7.getScene().getWindow();
         Scene scene = new Scene(root,1100,750);
         circleList = com.getCircleList(); //to refer our truck points
@@ -496,7 +498,7 @@ public class Controller extends AnchorPane {
         sp.setContent(l);
 
         for (int i = 0; i < vehicleList.size(); i++) {
-            Image image = new Image(new FileInputStream("truck24x24.png"));
+            Image image = new Image(new FileInputStream("src/res/truck24x24.png"));
             ImageView img = new ImageView();
             img.setImage(image);
 

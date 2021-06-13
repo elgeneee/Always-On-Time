@@ -16,12 +16,12 @@ public class Graph extends Thread{
     double adjMatrix[][];
     int numOfVehicles;
     Depot d;
-    ArrayList<Location> c;
+    public ArrayList<Location> c;
     double dist;
     Queue<Integer> q;
     LinkedList<Location> linkedList = new LinkedList<>();
     ArrayList<Vehicle> vehicleList = new ArrayList<>();
-    StringBuilder sb;
+    public StringBuilder sb;
     double routeCost;
     double tourCost;
 
@@ -561,7 +561,9 @@ public class Graph extends Thread{
                     best_tour = new_tour;
                     adapt(best_tour,level);
                 }
-                if(Duration.between(startTime, Instant.now()).getSeconds() > timeLimit);
+                if(Duration.between(startTime, Instant.now()).getSeconds() > timeLimit){
+                    return best_tour;
+                }
             }
             globalPolicy = policy[level-1];
         }
@@ -581,7 +583,6 @@ public class Graph extends Thread{
                 ALPHA=1;
                 policy[level-1][a_tour.getRoute().get(i).get(j).id][a_tour.getRoute().get(i).get(j+1).id] += ALPHA;
                 z = 0.0;
-                //for every possible move that can be made by stop
                 for (int k = 0; k < location.size(); k++) {
                     if(location.get(k).id!=a_tour.getRoute().get(i).get(j).id){
                         if(!visited.contains(location.get(k))){
@@ -589,7 +590,6 @@ public class Graph extends Thread{
                         }
                     }
                 }
-                //for every possible move that can be made by stop
                 for (int k = 0; k < location.size(); k++) {
                     if(location.get(k).id != a_tour.getRoute().get(i).get(j).id){
                         if(!visited.contains(location.get(k))){
