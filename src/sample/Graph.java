@@ -430,6 +430,59 @@ public class Graph extends Thread{
     }
 
     /**
+     * Returns the route for each vehicle after it performs the Dijkstra algorithm
+     *
+     * @return the tour that consists of different vehicle using different routes.
+     */
+    public ArrayList<Vehicle> dijkstra(){
+        tourCost = 0;
+        ArrayList<Location> open = new ArrayList<>(); //keeps all nodes that are discovered but not yet expanded
+        ArrayList<Location> closed = new ArrayList<>();
+        //store c in open
+        for (int i = 0; i<c.size(); i++) {
+            open.add(c.get(i));
+        }
+        closed.add(open.remove(0)); //add depot to visited
+        Location currentNode = closed.get(0);
+        int maxCapacity = d.maximumCapacity;
+        int currentRouteCapacity = 0;
+
+        while (!open.isEmpty()) {
+            double shortest = Double.POSITIVE_INFINITY;
+            int openID = -1; //ID of open, if nothing then -1
+            for (int i = 0; i<open.size(); i++) { //to find best possible nextStop
+                Location nextStop = open.get(i);
+                double distance = adjMatrix[currentNode.id][nextStop.id];
+
+                //condition 1: shortest distance among latest list of open
+                //condition 2: if add this nextNode does not exceed maximumCapacity
+                if (distance < shortest && currentRouteCapacity + open.get(i).demandSize <= maxCapacity) {
+                    shortest = distance;
+                    openID = i;
+                }
+            }
+            if (openID != -1) {//found suitable next node
+                closed.add(open.remove(openID));
+                currentNode = closed.get(closed.size() - 1); //refresh currentNode
+                currentRouteCapacity += closed.get(closed.size() - 1).demandSize;
+            }
+            else { //new route, reset data of route
+                currentNode = closed.get(0); //restart currentNode at depot, but not added into (ArrayList) closed
+                currentRouteCapacity = 0;
+            }
+        }
+        closed.remove(0);
+
+        tourCost=vehicleDistribution(closed);
+        //display output
+        sb = new StringBuilder();
+        sb.append("Dijkstra Simulation Tour\nTour Cost: " + tourCost + "\n");
+        displayVehicle(vehicleList);
+        resetVisited();
+        return vehicleList;
+    }
+
+    /**
      * Returns the tour cost that is the summation of routes taken by each vehicle. It distributes the list of locations based on the vehicle maximum capacity and customer demand size,
      * makes into linked list, then stores in vehicleList.
      *
@@ -629,4 +682,5 @@ public class Graph extends Thread{
         }
         return possible_successors.get(j);
     }
+
 }

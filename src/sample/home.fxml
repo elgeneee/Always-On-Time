@@ -15,12 +15,12 @@
    <children>
       <AnchorPane prefHeight="750.0" prefWidth="265.0" style="-fx-background-color: #393351;" stylesheets="@../CSS/Button.css">
          <children>
-            <ImageView fitHeight="86.0" fitWidth="245.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="71.0" fitWidth="222.0" layoutX="34.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../sample/logoTitle.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btn1" layoutX="47.0" layoutY="125.0" onAction="#loadFile" prefHeight="46.0" prefWidth="179.0" stylesheets="@../CSS/Button.css" text="UPLOAD" textFill="WHITE">
+            <JFXButton fx:id="btn1" layoutX="43.0" layoutY="100.0" onAction="#loadFile" prefHeight="46.0" prefWidth="179.0" stylesheets="@../CSS/Button.css" text="UPLOAD" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="16.0" />
                </font>
@@ -31,31 +31,37 @@
                   <Shadow />
                </effect>
             </JFXButton>
-            <JFXButton fx:id="btn2" layoutY="196.0" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Basic" textFill="WHITE">
+            <JFXButton fx:id="btn2" layoutY="180.0" prefHeight="35.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Basic" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>
             </JFXButton>
-            <Line endX="100.0" layoutX="135.0" layoutY="243.0" startX="-100.0" stroke="#c4c4c433" />
-            <JFXButton fx:id="btn3" layoutY="244.0" prefHeight="44.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Greedy" textFill="WHITE">
+            <Line endX="100.0" layoutX="130.0" layoutY="216.0" startX="-100.0" stroke="#c4c4c433" />
+            <JFXButton fx:id="btn3" layoutY="217.0" prefHeight="35.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Greedy" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>
             </JFXButton>
-            <Line endX="100.0" layoutX="136.0" layoutY="289.0" startX="-100.0" stroke="#c4c4c433" />
-            <JFXButton fx:id="btn4" layoutY="290.0" prefHeight="45.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="MCTS" textFill="WHITE">
+            <Line endX="100.0" layoutX="130.0" layoutY="253.0" startX="-100.0" stroke="#c4c4c433" />
+            <JFXButton fx:id="btn4" layoutY="254.0" prefHeight="35.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="MCTS" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>
             </JFXButton>
-            <Line endX="100.0" layoutX="136.0" layoutY="336.0" startX="-100.0" stroke="#c4c4c433" />
-            <JFXButton fx:id="btn5" layoutY="337.0" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Best First Search" textFill="WHITE">
+            <Line endX="100.0" layoutX="130.0" layoutY="290.0" startX="-100.0" stroke="#c4c4c433" />
+            <JFXButton fx:id="btn5" layoutY="291.0" prefHeight="35.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Best First Search" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>
             </JFXButton>
-            <Line endX="100.0" layoutX="136.0" layoutY="383.0" startX="-100.0" stroke="#c4c4c433" />
-            <JFXButton fx:id="btn6" layoutY="384.0" prefHeight="46.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="A*" textFill="WHITE">
+            <Line endX="100.0" layoutX="130.0" layoutY="327.0" startX="-100.0" stroke="#c4c4c433" />
+            <JFXButton fx:id="btn6" layoutY="328.0" prefHeight="35.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="A*" textFill="WHITE">
+               <font>
+                  <Font name="Avenir Next Bold" size="17.0" />
+               </font>
+            </JFXButton>
+            <Line endX="100.0" layoutX="130.0" layoutY="364.0" startX="-100.0" stroke="#c4c4c433" />
+            <JFXButton fx:id="btn7" layoutY="365.0" prefHeight="35.0" prefWidth="265.0" stylesheets="@../CSS/Button.css" text="Dijkstra" textFill="WHITE">
                <font>
                   <Font name="Avenir Next Bold" size="17.0" />
                </font>

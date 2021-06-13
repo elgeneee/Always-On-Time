@@ -53,3 +53,10 @@
     -fx-cursor: hand;
 }
 
+#btn7:hover{
+    -fx-background-color: #5c5282;
+    -fx-border-color: WHITE;
+    -fx-border-width: 0px 0px 0px 3px;
+    -fx-cursor: hand;
+}
+
