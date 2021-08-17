@@ -38,4 +38,7 @@ We as professional engineer are requested to simulate the delivery process and p
 
 
 ## Sample Outputs
-<img src="src/res/demo.gif" width="800" height="665.82" />
+<p align="center">
+    <img src="src/res/demo.gif" width="800" height="665.82" />
+</p>
+
