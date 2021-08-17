@@ -5,15 +5,14 @@
 </p>
 
 <!--TABLE OF CONTENTS-->
-<details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
-  <ol>
-  1.[Our Team](#our-team-)    
-  </ol>
-</details>
+## Table Of Contents
+  1. [Our Team](#our-team)
+  2. [About The Project](#about-the-project)
+  3. [Sample Outputs](#sample-outputs)
+
 
 <!--OUR TEAM-->
-####Our Team
+## Our Team
 No. | Team Member
 --- | --- | 
 1 | PANG CHONG WEN
@@ -21,6 +20,21 @@ No. | Team Member
 3 | TAN CHIAO YUN
 4 | LIM BOON GUAN
 
+## Problem Statement
+We as professional engineer are requested to simulate the delivery process and planning in a country to help our friend shorten their delivery time using different searching algorithms.
+
+## Algorithms
+- Basic Simulation (DFS)
+- Greedy Search
+- A* Search
+- Dijkstra's Algorithm
+- Monte Carlo Tree Search (MCTS)
+
 
 <!--ABOUT THE PROJECT-->
-##About The Project
+## About The Project
+
+
+
+
+## Sample Outputs
