@@ -38,3 +38,4 @@ We as professional engineer are requested to simulate the delivery process and p
 
 
 ## Sample Outputs
+![alt text](src/res/demo.gif)
