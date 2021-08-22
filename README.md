@@ -56,7 +56,7 @@ Before setting up the project, there are 2 external libraries you need to add in
 1. [JavaFX 16](https://gluonhq.com/products/javafx/)
 2. [JFoeniX 9.x.x](https://github.com/sshahine/JFoenix)
 
-Click [here]() for more information regarding how to setup external libraries in your project.
+Click [here](https://www.youtube.com/watch?v=DPjmIn0rWY0) for more information regarding how to setup external libraries in your project.
 
 ## Sample Outputs
 <p align="center">
