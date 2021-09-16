@@ -7,8 +7,12 @@
 <!--TABLE OF CONTENTS-->
 ## Table Of Contents
   1. [Our Team](#our-team)
-  2. [About The Project](#about-the-project)
-  3. [Sample Outputs](#sample-outputs)
+  2. [Problem Statement](#problem-statement)
+  3. [About The Project](#about-the-project)
+  4. [Algorithms](#algorithms)
+  5. [Input](#input)
+  6. [Extenal Libraries](#external-libraries)
+  7. [Sample Outputs](#sample-outputs)
 
 
 <!--OUR TEAM-->
