@@ -11,7 +11,7 @@
   3. [About The Project](#about-the-project)
   4. [Algorithms](#algorithms)
   5. [Input](#input)
-  6. [Extenal Libraries](#external-libraries)
+  6. [External Libraries](#external-libraries)
   7. [Sample Outputs](#sample-outputs)
 
 
